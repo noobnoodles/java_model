@@ -45,7 +45,6 @@ git clone https://github.com/noobnoodles/java_model.git
 ```bash
 mvn clean install
 ```
-
 3. Run example
 ```bash
 cd example/boot-example
@@ -85,3 +84,4 @@ mvn spring-boot:run
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details
+
