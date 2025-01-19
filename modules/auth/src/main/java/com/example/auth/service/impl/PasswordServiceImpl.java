@@ -3,7 +3,6 @@ package com.example.auth.service.impl;
 import com.example.auth.mapper.PasswordMapper;
 import com.example.auth.model.dto.ResetPasswordDTO;
 import com.example.auth.model.dto.SendVerifyCodeDTO;
-import com.example.auth.model.entity.User;
 import com.example.auth.service.PasswordService;
 import com.example.auth.util.VerifyCodeSender;
 import com.example.auth.util.VerifyCodeUtil;

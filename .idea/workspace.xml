@@ -4,52 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3071d823-c5f8-4c81-b412-2ef621ca1dae" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/modules/auth/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/auth/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/auth/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/common-core/src/main/java/com/example/common/core/exception/BusinessException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/common-core/src/main/java/com/example/common/core/handler/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/common-core/src/main/java/com/example/common/core/result/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/src/main/java/com/example/boot/BootApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/src/main/java/com/example/boot/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/src/main/java/com/example/boot/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/target/classes/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/target/classes/com/example/boot/BootApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/target/classes/com/example/boot/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/boot-example/target/classes/com/example/boot/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/ForgetPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/ForgetPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/dto/LoginDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/dto/RegisterDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/dto/ResetPasswordDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/enums/LoginType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/PasswordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/PasswordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/LoginServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/PasswordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/PasswordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/RegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/vo/UserVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/modules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3071d823-c5f8-4c81-b412-2ef621ca1dae" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

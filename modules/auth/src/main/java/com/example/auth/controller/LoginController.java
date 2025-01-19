@@ -1,37 +1,43 @@
 package com.example.auth.controller;
 
 import com.example.auth.model.dto.LoginDTO;
+import com.example.auth.model.vo.UserVO;
+import com.example.auth.service.LoginService;
 import com.example.common.core.result.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Tag(name = "登录管理")
 @RestController
 @RequestMapping("/auth/login")
 @RequiredArgsConstructor
 public class LoginController {
 
-    @Operation(summary = "用户登录")
-    @PostMapping
-    public R<String> login(@Validated @RequestBody LoginDTO loginDTO) {
-        // TODO: 实现登录逻辑
-        return R.ok("登录成功");
+    private final LoginService loginService;
+
+    @Operation(summary = "密码登录")
+    @PostMapping("/password")
+    public R<UserVO> loginByPassword(@Validated @RequestBody LoginDTO loginDTO) {
+        UserVO userVO = loginService.loginByPassword(loginDTO);
+        return R.ok(userVO);
+    }
+
+    @Operation(summary = "验证码登录")
+    @PostMapping("/code")
+    public R<UserVO> loginByCode(@Validated @RequestBody LoginDTO loginDTO, @RequestParam String code) {
+        UserVO userVO = loginService.loginByCode(loginDTO, code);
+        return R.ok(userVO);
     }
 
     @Operation(summary = "用户登出")
     @PostMapping("/logout")
-    public R<Void> logout() {
-        // TODO: 实现登出逻辑
-        return R.ok();
-    }
-
-    @Operation(summary = "刷新令牌")
-    @PostMapping("/refresh")
-    public R<String> refresh() {
-        // TODO: 实现令牌刷新逻辑
+    public R<Void> logout(@RequestHeader("Authorization") String token) {
+        loginService.logout(token);
         return R.ok();
     }
 } 
