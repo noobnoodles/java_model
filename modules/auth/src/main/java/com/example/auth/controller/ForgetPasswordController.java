@@ -1,6 +1,8 @@
 package com.example.auth.controller;
 
-import com.example.common.core.result.R;
+import com.example.auth.model.dto.ResetPasswordDTO;
+import com.example.auth.model.dto.SendCodeDTO;
+import com.example.common.core.model.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

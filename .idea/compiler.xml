@@ -6,8 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="boot-example" />
+        <module name="common-security" />
+        <module name="auth" />
+        <module name="common-redis" />
+        <module name="common-core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="boot-example" target="17" />
+      <module name="common" target="17" />
+      <module name="example" target="17" />
+      <module name="framework" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

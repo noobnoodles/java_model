@@ -1,5 +1,6 @@
 package com.example.auth.controller;
 
+import com.example.auth.model.dto.RegisterDTO;
 import com.example.common.core.result.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

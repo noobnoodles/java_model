@@ -1,10 +1,11 @@
 package com.example.auth.service.impl;
 
-import com.example.auth.dto.RegisterDTO;
+import com.example.auth.model.entity.User;
+import com.example.auth.mapper.RegisterMapper;
 import com.example.auth.service.RegisterService;
-import com.example.auth.vo.UserVO;
 import com.example.common.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,46 +15,54 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
 
-    private final UserMapper userMapper;
+    private final RegisterMapper registerMapper;
     private final PasswordEncoder passwordEncoder;
     
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public UserVO register(RegisterDTO registerDTO) {
-        log.info("开始注册用户：{}", registerDTO.getUsername());
-        
-        // 验证用户名是否已存在
-        if (userMapper.findByUsername(registerDTO.getUsername()) != null) {
-            log.warn("用户名已存在：{}", registerDTO.getUsername());
-            throw new BusinessException(400, "用户名已存在");
+    public int register(User user) {
+        // 检查账号是否已存在
+        if (!checkAccountAvailable(user.getAccount(), user.getSysBelone())) {
+            throw new BusinessException("账号已存在");
         }
         
-        // 验证两次密码是否一致
-        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
-            log.warn("两次输入的密码不一致");
-            throw new BusinessException(400, "两次输入的密码不一致");
+        // 检查用户名是否已存在
+        if (!checkUsernameAvailable(user.getUsername(), user.getSysBelone())) {
+            throw new BusinessException("用户名已存在");
         }
         
-        try {
-            // 创建用户
-            User user = new User();
-            user.setUsername(registerDTO.getUsername());
-            user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-            user.setStatus(1); // 1: 正常状态
-            
-            // 保存用户
-            userMapper.insert(user);
-            log.info("用户注册成功：{}", user.getUsername());
-            
-            // 转换为VO返回
-            return UserVO.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .build();
-                
-        } catch (Exception e) {
-            log.error("用户注册失败：", e);
-            throw new BusinessException(500, "注册失败，请稍后重试");
+        // 检查邮箱是否已存在
+        if (user.getEmail() != null && !checkEmailAvailable(user.getEmail(), user.getSysBelone())) {
+            throw new BusinessException("邮箱已被使用");
         }
+        
+        // 加密密码
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
+        // 注册用户
+        int rows = registerMapper.insertUser(user);
+        
+        if (rows > 0) {
+            log.info("用户注册成功: {}", user.getAccount());
+        } else {
+            log.error("用户注册失败: {}", user.getAccount());
+        }
+        
+        return rows;
+    }
+    
+    @Override
+    public boolean checkUsernameAvailable(String username, String sysBelone) {
+        return registerMapper.checkUsernameExists(username, sysBelone) == 0;
+    }
+    
+    @Override
+    public boolean checkAccountAvailable(String account, String sysBelone) {
+        return registerMapper.checkAccountExists(account, sysBelone) == 0;
+    }
+    
+    @Override
+    public boolean checkEmailAvailable(String email, String sysBelone) {
+        return registerMapper.checkEmailExists(email, sysBelone) == 0;
     }
 } 
