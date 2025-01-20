@@ -20,4 +20,12 @@ public interface RegisterMapper {
     @Insert("INSERT INTO user_info (account, username, password, email, sys_belone, phone, sexual, avatar, sign) " +
             "VALUES (#{account}, #{username}, #{password}, #{email}, #{sysBelone}, #{phone}, #{sexual}, #{avatar}, #{sign})")
     int insertUser(User user);
+    
+    /**
+     * 统计指定系统的用户总数
+     * @param sysBelone 所属系统
+     * @return 用户总数
+     */
+    @Select("SELECT COUNT(*) FROM user_info WHERE sys_belone = #{sysBelone}")
+    int countUserNumber(String sysBelone);
 } 

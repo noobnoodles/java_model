@@ -3,6 +3,7 @@ package com.example.auth.service.impl;
 import com.example.auth.model.entity.User;
 import com.example.auth.mapper.RegisterMapper;
 import com.example.auth.service.RegisterService;
+import com.example.auth.util.AccountNumCreate;
 import com.example.common.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +18,14 @@ public class RegisterServiceImpl implements RegisterService {
 
     private final RegisterMapper registerMapper;
     private final PasswordEncoder passwordEncoder;
+    private final AccountNumCreate accountNumCreate;
     
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int register(User user) {
-        // 检查账号是否已存在
-        if (!checkAccountAvailable(user.getAccount(), user.getSysBelone())) {
-            throw new BusinessException("账号已存在");
-        }
+        // 生成账号
+        String account = accountNumCreate.createNewAccount(user.getSysBelone());
+        user.setAccount(account);
         
         // 检查用户名是否已存在
         if (!checkUsernameAvailable(user.getUsername(), user.getSysBelone())) {

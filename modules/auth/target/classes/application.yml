@@ -11,9 +11,9 @@ spring:
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/auth?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/genera?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: 123456
     
   # Redis配置
   redis:
@@ -38,3 +38,12 @@ logging:
 sql:
   init:
     mode: never  # 关闭自动执行schema.sql，因为表已经存在 
+
+# 系统信息配置
+system:
+  info:
+    title: 统一认证中心
+    description: Unified Authentication Center
+    version: 1.0.0
+    copyright: © 2024 Your Company. All rights reserved.
+    sys-belone: test  # 添加系统标识 

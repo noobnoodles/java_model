@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Tag(name = "登录管理")
+@CrossOrigin(originPatterns = "http://localhost:[*]", allowCredentials = "true")
 @RestController
 @RequestMapping("/auth/login")
 @RequiredArgsConstructor
