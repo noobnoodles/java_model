@@ -6,7 +6,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -16,10 +18,15 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class TokenUtil {
     
-    // 根据密钥字符串生成加密密钥
-    private SecretKey getSignKey() {
-        byte[] keyBytes = TokenConstants.TOKEN_SECRET.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
+    @Value("${jwt.secret}")
+    private String secret;
+    
+    private SecretKey getSigningKey() {
+        // 方法1：使用 Keys.secretKeyFor 生成安全的密钥
+        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        
+        // 或者方法2：从配置的 secret 生成足够长度的密钥
+        // return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF8));
     }
     
     /**
@@ -28,33 +35,26 @@ public class TokenUtil {
      * @return token
      */
     public String generateToken(User user) {
-        Date now = new Date();
-        Date expireDate = new Date(now.getTime() + TokenConstants.TOKEN_EXPIRE);
-        
         return Jwts.builder()
-                .setSubject(user.getAccount())
-                .claim("username", user.getUsername())
-                .claim("sysBelone", user.getSysBelone())
-                .setIssuedAt(now)
-                .setExpiration(expireDate)
-                .signWith(getSignKey())
-                .compact();
+            .setSubject(user.getUsername())
+            .claim("userId", user.getAccount())
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + TokenConstants.TOKEN_EXPIRE))
+            .signWith(getSigningKey())  // 使用安全的密钥
+            .compact();
     }
     
     /**
      * 生成刷新token
      */
     public String generateRefreshToken(User user) {
-        Date now = new Date();
-        Date expireDate = new Date(now.getTime() + TokenConstants.REFRESH_TOKEN_EXPIRE);
-        
         return Jwts.builder()
-                .setSubject(user.getAccount())
-                .claim("type", "refresh")
-                .setIssuedAt(now)
-                .setExpiration(expireDate)
-                .signWith(getSignKey())
-                .compact();
+            .setSubject(user.getUsername())
+            .claim("userId", user.getAccount())
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + TokenConstants.REFRESH_TOKEN_EXPIRE))
+            .signWith(getSigningKey())  // 使用安全的密钥
+            .compact();
     }
     
     /**
@@ -63,7 +63,7 @@ public class TokenUtil {
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                .setSigningKey(getSignKey())
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token);
             return true;
@@ -77,7 +77,7 @@ public class TokenUtil {
      */
     public String getAccountFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
-            .setSigningKey(getSignKey())
+            .setSigningKey(getSigningKey())
             .build()
             .parseClaimsJws(token)
             .getBody();

@@ -2,6 +2,7 @@ package com.example.auth.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -13,7 +14,7 @@ public class LoginDTO {
     private String account;
 
     @Schema(description = "登录类型(1:用户名,2:手机号,3:邮箱)")
-    @NotBlank(message = "登录类型不能为空")
+    @NotNull(message = "登录类型不能为空")
     private Integer loginType;
 
     @Schema(description = "密码")

@@ -47,3 +47,6 @@ system:
     version: 1.0.0
     copyright: © 2024 Your Company. All rights reserved.
     sys-belone: test  # 添加系统标识 
+
+jwt:
+  secret: your_jwt_secret_key_must_be_at_least_256_bits_long_so_make_it_long_enough 

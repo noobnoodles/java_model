@@ -27,13 +27,19 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserVO loginByPassword(LoginDTO loginDTO) {
         // 根据登录类型获取用户信息
-        User user = switch (loginDTO.getLoginType()) {
-            case 1 -> loginMapper.getUserByAccount(loginDTO.getAccount(), loginDTO.getSysBelone());
-            case 2 -> loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
-            case 3 -> loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
-            default -> throw new BusinessException("不支持的登录类型");
-        };
-        
+        User user;
+
+        int loginType = loginDTO.getLoginType();
+        if (loginType == 1) {
+            user = loginMapper.getUserByUserName(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else if (loginType == 2) {
+            user = loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else if (loginType == 3) {
+            user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else {
+            throw new BusinessException("不支持的登录类型");
+        }
+
         // 验证用户是否存在
         if (user == null) {
             throw new BusinessException("用户不存在");
@@ -60,12 +66,17 @@ public class LoginServiceImpl implements LoginService {
         }
         
         // 根据登录类型获取用户信息
-        User user = switch (loginDTO.getLoginType()) {
-            case 1 -> loginMapper.getUserByAccount(loginDTO.getAccount(), loginDTO.getSysBelone());
-            case 2 -> loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
-            case 3 -> loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
-            default -> throw new BusinessException("不支持的登录类型");
-        };
+        User user;
+        int loginType = loginDTO.getLoginType();
+        if (loginType == 1) {
+            user = loginMapper.getUserByAccount(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else if (loginType == 2) {
+            user = loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else if (loginType == 3) {
+            user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
+        } else {
+            throw new BusinessException("不支持的登录类型");
+        }
         
         // 验证用户是否存在
         if (user == null) {

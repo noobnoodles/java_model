@@ -6,49 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3071d823-c5f8-4c81-b412-2ef621ca1dae" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/ForgetPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/ForgetPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/mapper/RegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/mapper/RegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/model/dto/RegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/model/dto/RegisterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/RegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/AuthApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/AuthApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$RedisKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$RedisKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$TokenStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$TokenStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$TokenType.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants$TokenType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/constant/TokenConstants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/ForgetPasswordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/ForgetPasswordController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/RegisterController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/LoginMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/LoginMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/PasswordMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/PasswordMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/RegisterMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/mapper/RegisterMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/LoginDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/LoginDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/mapper/LoginMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/mapper/LoginMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/model/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/model/dto/LoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/src/main/java/com/example/auth/service/impl/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/SystemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/controller/SystemController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/RegisterDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/RegisterDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/ResetPasswordDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/ResetPasswordDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/SendCodeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/SendCodeDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/SendVerifyCodeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/dto/SendVerifyCodeDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/enums/LoginType.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/enums/LoginType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/vo/UserVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/vo/UserVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/LoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/LoginService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/PasswordService.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/PasswordService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/RegisterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/RegisterService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/LoginServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/LoginServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/PasswordServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/PasswordServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/RegisterServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/service/impl/RegisterServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/TokenUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/TokenUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/VerifyCodeSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/VerifyCodeSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/VerifyCodeUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/util/VerifyCodeUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/exception/BusinessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/exception/BusinessException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/handler/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/handler/GlobalExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/model/R.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/model/R.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/result/R.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/result/R.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/utils/AssertUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/common-core/target/classes/com/example/common/core/utils/AssertUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/vo/SystemInfoVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/target/classes/com/example/auth/model/vo/SystemInfoVO.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,21 +42,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.common-core [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.java_model [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.java_model [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.modules [install].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ones/Desktop/other/code/web_model/java_model&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;应用程序.AuthApplication.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.common-core [install].executor": "Run",
+    "Maven.java_model [clean].executor": "Run",
+    "Maven.java_model [install].executor": "Run",
+    "Maven.modules [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ones/Desktop/other/code/web_model/java_model",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "应用程序.AuthApplication.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="AuthApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.auth.AuthApplication" />
