@@ -1,6 +1,6 @@
 package com.example.auth.service;
 
-import com.example.auth.model.entity.User;
+import com.example.auth.model.dto.RegisterDTO;
 
 public interface RegisterService {
     
@@ -10,7 +10,7 @@ public interface RegisterService {
      * @return 注册结果(1:成功,0:失败)
      * throws BusinessException 当用户名/账号/邮箱已存在时抛出异常
      */
-    int register(User user);
+    int register(RegisterDTO registerDTO);
     
     /**
      * 检查用户名是否可用

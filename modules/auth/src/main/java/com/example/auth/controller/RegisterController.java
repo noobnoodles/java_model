@@ -25,16 +25,8 @@ public class RegisterController {
     @PostMapping
     public R<Void> register(@Validated @RequestBody RegisterDTO registerDTO) {
         // 转换DTO为实体
-        User user = new User();
-        user.setAccount(registerDTO.getAccount());
-        user.setUsername(registerDTO.getUsername());
-        user.setPassword(registerDTO.getPassword());
-        user.setEmail(registerDTO.getEmail());
-        user.setPhone(registerDTO.getPhone());
-        user.setSysBelone(registerDTO.getSysBelone());
-        
         // 执行注册
-        int result = registerService.register(user);
+        int result = registerService.register(registerDTO);
         return result > 0 ? R.ok() : R.fail("注册失败");
     }
     
@@ -42,12 +34,6 @@ public class RegisterController {
     @GetMapping("/check-username")
     public R<Boolean> checkUsername(@RequestParam String username, @RequestParam String sysBelone) {
         return R.ok(registerService.checkUsernameAvailable(username, sysBelone));
-    }
-    
-    @Operation(summary = "检查账号是否可用")
-    @GetMapping("/check-account")
-    public R<Boolean> checkAccount(@RequestParam String account, @RequestParam String sysBelone) {
-        return R.ok(registerService.checkAccountAvailable(account, sysBelone));
     }
     
     @Operation(summary = "检查邮箱是否可用")

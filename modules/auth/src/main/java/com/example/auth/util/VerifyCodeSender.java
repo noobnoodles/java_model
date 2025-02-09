@@ -1,7 +1,10 @@
 package com.example.auth.util;
 
+import com.example.auth.config.MailConfig;
 import com.example.auth.model.dto.SendVerifyCodeDTO;
 import com.example.common.core.exception.BusinessException;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class VerifyCodeSender {
     
     private final VerifyCodeUtil verifyCodeUtil;
+    private final MailConfig mailConfig;
     
     /**
      * 发送验证码
@@ -26,13 +30,10 @@ public class VerifyCodeSender {
         
         // 生成验证码
         String code = verifyCodeUtil.generateCode();
+        sendVerifyCodeDTO.setCode(code);
         
-        // 根据目标类型发送验证码
-        boolean sendResult = switch (sendVerifyCodeDTO.getTargetType()) {
-            case 1 -> sendSmsCode(sendVerifyCodeDTO.getTarget(), code);  // 发送短信验证码
-            case 2 -> sendEmailCode(sendVerifyCodeDTO.getTarget(), code);  // 发送邮件验证码
-            default -> throw new BusinessException("不支持的发送类型");
-        };
+        // 发送邮件验证码
+        boolean sendResult = sendEmailCode(sendVerifyCodeDTO);
         
         if (sendResult) {
             // 保存验证码
@@ -48,20 +49,17 @@ public class VerifyCodeSender {
     }
     
     /**
-     * 发送短信验证码
-     * TODO: 实现短信发送逻辑
-     */
-    private boolean sendSmsCode(String phone, String code) {
-        log.info("[短信验证码] 发送到:{} 验证码:{}", phone, code);
-        return true;
-    }
-    
-    /**
      * 发送邮件验证码
-     * TODO: 实现邮件发送逻辑
      */
-    private boolean sendEmailCode(String email, String code) {
-        log.info("[邮件验证码] 发送到:{} 验证码:{}", email, code);
-        return true;
+    private boolean sendEmailCode(SendVerifyCodeDTO dto) {
+        try {
+            MessageBuilder messageBuilder = new MessageBuilder(mailConfig, dto);
+            Message message = messageBuilder.build();
+            jakarta.mail.Transport.send(message);
+            return true;
+        } catch (MessagingException e) {
+            log.error("[邮件验证码] 发送失败", e);
+            return false;
+        }
     }
 } 

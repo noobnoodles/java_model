@@ -33,6 +33,10 @@ public class RegisterDTO {
     @Schema(description = "邮箱")
     private String email;
     
+    @NotBlank(message = "邮箱验证码不能为空")
+    @Schema(description = "邮箱验证码")
+    private String emailCode;
+    
     @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
     @Schema(description = "手机号")
     private String phone;
