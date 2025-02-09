@@ -9,14 +9,16 @@ com\example\auth\util\TokenUtil.class
 com\example\auth\util\VerifyCodeSender.class
 com\example\auth\model\vo\UserVO.class
 com\example\auth\constant\TokenConstants$TokenStatus.class
+com\example\auth\controller\SystemController.class
 com\example\auth\model\dto\LoginDTO.class
 com\example\auth\service\LoginService.class
 com\example\auth\constant\TokenConstants$TokenType.class
 com\example\auth\model\dto\RegisterDTO.class
-com\example\auth\model\dto\SendCodeDTO.class
+com\example\auth\AuthApplication.class
 com\example\auth\constant\TokenConstants.class
 com\example\auth\controller\RegisterController.class
 com\example\auth\mapper\RegisterMapper.class
+com\example\auth\model\vo\SystemInfoVO.class
 com\example\auth\constant\TokenConstants$RedisKey.class
 com\example\auth\model\enums\LoginType.class
 com\example\auth\service\impl\LoginServiceImpl.class
@@ -24,4 +26,6 @@ com\example\auth\model\dto\ResetPasswordDTO.class
 com\example\auth\model\entity\User.class
 com\example\auth\util\VerifyCodeUtil.class
 com\example\auth\mapper\PasswordMapper.class
+com\example\auth\config\SecurityConfig.class
+com\example\auth\util\AccountNumCreate.class
 com\example\auth\controller\ForgetPasswordController.class

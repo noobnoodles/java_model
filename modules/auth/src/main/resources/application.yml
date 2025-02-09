@@ -23,6 +23,22 @@ spring:
     password: 
     timeout: 10s
     
+  # 邮件配置
+  mail:
+    host: smtp.qq.com  # 以QQ邮箱为例
+    port: 465         # QQ邮箱的SSL端口
+    username: 3129180887@qq.com    # 您的邮箱地址
+    password: gzhbshwhaoyyddih        # 您的邮箱授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true          # 启用SSL
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+
 # MyBatis配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
