@@ -96,10 +96,11 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public boolean checkEmailAvailable(String email, String sysBelone) {
         // 检查邮箱是否已存在
-        if (registerMapper.checkEmailExists(email, sysBelone) > 0) {
-            return false;  // 邮箱已存在，不可用
-        }
-        
+        return registerMapper.checkEmailExists(email, sysBelone) == 0;
+    }
+
+    @Override
+    public boolean sendEmailCode(String email, String sysBelone) {
         try {
             // 构建验证码发送请求
             SendVerifyCodeDTO sendVerifyCodeDTO = new SendVerifyCodeDTO();
@@ -114,9 +115,10 @@ public class RegisterServiceImpl implements RegisterService {
                 throw new BusinessException("验证码发送失败");
             }
             
-            return true;  // 邮箱可用，且验证码发送成功
+            return true;
             
         } catch (Exception e) {
+            log.error("[邮箱验证码] 发送失败：{}", e.getMessage());
             throw new BusinessException("验证码发送失败：" + e.getMessage());
         }
     }

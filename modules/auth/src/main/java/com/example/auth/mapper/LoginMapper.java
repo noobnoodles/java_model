@@ -1,7 +1,6 @@
 package com.example.auth.mapper;
 
 import com.example.auth.model.entity.User;
-import jakarta.validation.constraints.NotBlank;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

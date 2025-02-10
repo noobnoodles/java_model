@@ -35,4 +35,12 @@ public interface RegisterService {
      * @return true:可用 false:已存在
      */
     boolean checkEmailAvailable(String email, String sysBelone);
+
+    /**
+     * 发送邮箱验证码
+     * @param email 邮箱
+     * @param sysBelone 系统标识
+     * @return true:发送成功 false:发送失败
+     */
+    boolean sendEmailCode(String email, String sysBelone);
 } 

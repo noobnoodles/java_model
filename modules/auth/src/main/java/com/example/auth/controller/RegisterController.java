@@ -1,7 +1,6 @@
 package com.example.auth.controller;
 
 import com.example.auth.model.dto.RegisterDTO;
-import com.example.auth.model.entity.User;
 import com.example.auth.service.RegisterService;
 import com.example.common.core.result.R;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,9 +35,22 @@ public class RegisterController {
         return R.ok(registerService.checkUsernameAvailable(username, sysBelone));
     }
     
-    @Operation(summary = "检查邮箱是否可用")
-    @GetMapping("/check-email")
-    public R<Boolean> checkEmail(@RequestParam String email, @RequestParam String sysBelone) {
-        return R.ok(registerService.checkEmailAvailable(email, sysBelone));
+    @Operation(summary = "发送邮箱验证码")
+    @PostMapping("/send-email-code")
+    public R<Void> sendEmailCode(
+        @RequestParam("email") String email, 
+        @RequestParam("sysBelone") String sysBelone
+    ) {
+        // 先检查邮箱是否可用
+        if (!registerService.checkEmailAvailable(email, sysBelone)) {
+            return R.fail("该邮箱已被使用");
+        }
+        
+        // 发送验证码
+        if (registerService.sendEmailCode(email, sysBelone)) {
+            return R.ok();
+        } else {
+            return R.fail("验证码发送失败");
+        }
     }
 } 

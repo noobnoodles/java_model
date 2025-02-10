@@ -11,7 +11,7 @@ spring:
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/genera?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/auth?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     
@@ -20,7 +20,7 @@ spring:
     host: localhost
     port: 6379
     database: 0
-    password: 
+    password:    # 如果没有设置密码，此处留空
     timeout: 10s
     
   # 邮件配置
