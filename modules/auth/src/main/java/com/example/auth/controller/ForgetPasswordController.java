@@ -1,6 +1,6 @@
 package com.example.auth.controller;
 
-import com.example.auth.model.dto.ResetPasswordDTO;
+import com.example.auth.model.dto.ForgetPasswordDTO;
 import com.example.auth.model.dto.SendVerifyCodeDTO;
 import com.example.auth.service.PasswordService;
 import com.example.common.core.result.R;
@@ -23,8 +23,8 @@ public class ForgetPasswordController {
 
     @Operation(summary = "重置密码")
     @PostMapping("/reset")
-    public R<Void> resetPassword(@Validated @RequestBody ResetPasswordDTO resetPasswordDTO) {
-        int result = passwordService.resetPassword(resetPasswordDTO);
+    public R<Void> resetPassword(@Validated @RequestBody ForgetPasswordDTO forgetPasswordDTO) {
+        int result = passwordService.resetPassword(forgetPasswordDTO);
         return result > 0 ? R.ok() : R.fail("重置密码失败");
     }
 
@@ -37,20 +37,8 @@ public class ForgetPasswordController {
 
     @Operation(summary = "修改密码")
     @PostMapping("/change")
-    public R<Void> changePassword(@RequestParam String sysBelone,
-                                @RequestParam String account,
-                                @RequestParam String oldPassword,
-                                @RequestParam String newPassword) {
-        int result = passwordService.changePassword(sysBelone, account, oldPassword, newPassword);
+    public R<Void> changePassword(@Validated @RequestBody ForgetPasswordDTO forgetPasswordDTO) {
+        int result = passwordService.changePassword(forgetPasswordDTO);
         return result > 0 ? R.ok() : R.fail("修改密码失败");
-    }
-
-    @Operation(summary = "验证重置码")
-    @GetMapping("/verify")
-    public R<Boolean> verifyResetCode(@RequestParam String sysBelone,
-                                    @RequestParam String account,
-                                    @RequestParam String code) {
-        boolean result = passwordService.verifyResetCode(sysBelone, account, code);
-        return R.ok(result);
     }
 } 

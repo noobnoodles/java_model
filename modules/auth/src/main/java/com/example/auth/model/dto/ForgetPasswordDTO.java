@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-@Schema(description = "重置密码请求参数")
-public class ResetPasswordDTO {
+@Schema(description = "忘记密码请求参数")
+public class ForgetPasswordDTO {
     
-    @Schema(description = "账号(用户名/手机号/邮箱)")
-    @NotBlank(message = "账号不能为空")
-    private String account;
+    @Schema(description = "发送目标(邮箱)")
+    @NotBlank(message = "发送目标不能为空")
+    private String target;
     
     @Schema(description = "新密码")
     @NotBlank(message = "新密码不能为空")

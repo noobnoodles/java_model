@@ -1,4 +1,4 @@
-package com.example.auth.util;
+package com.example.auth.util.code;
 
 import cn.hutool.core.util.RandomUtil;
 import lombok.RequiredArgsConstructor;

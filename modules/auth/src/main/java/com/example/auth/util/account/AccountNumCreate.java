@@ -1,4 +1,4 @@
-package com.example.auth.util;
+package com.example.auth.util.account;
 
 import com.example.auth.mapper.RegisterMapper;
 import lombok.RequiredArgsConstructor;

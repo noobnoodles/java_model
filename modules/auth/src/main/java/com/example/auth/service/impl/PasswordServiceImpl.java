@@ -1,11 +1,11 @@
 package com.example.auth.service.impl;
 
 import com.example.auth.mapper.PasswordMapper;
-import com.example.auth.model.dto.ResetPasswordDTO;
+import com.example.auth.model.dto.ForgetPasswordDTO;
 import com.example.auth.model.dto.SendVerifyCodeDTO;
 import com.example.auth.service.PasswordService;
-import com.example.auth.util.VerifyCodeSender;
-import com.example.auth.util.VerifyCodeUtil;
+import com.example.auth.util.code.VerifyCodeSender;
+import com.example.auth.util.code.VerifyCodeUtil;
 import com.example.common.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,25 +28,27 @@ public class PasswordServiceImpl implements PasswordService {
     
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int resetPassword(ResetPasswordDTO resetPasswordDTO) {
+    public int resetPassword(ForgetPasswordDTO forgetPasswordDTO) {
         // 验证验证码
-        if (!verifyResetCode(resetPasswordDTO.getSysBelone(), resetPasswordDTO.getAccount(), resetPasswordDTO.getCode())) {
+        if (!verifyResetCode(forgetPasswordDTO.getSysBelone(), forgetPasswordDTO.getTarget(), forgetPasswordDTO.getCode())) {
             throw new BusinessException("验证码无效");
         }
         
         // 更新为默认密码
         String encodedPassword = passwordEncoder.encode(DEFAULT_PASSWORD);
-        int rows = passwordMapper.updatePassword(resetPasswordDTO.getSysBelone(), 
-                                               resetPasswordDTO.getAccount(), 
-                                               encodedPassword);
+        int rows = passwordMapper.updatePasswordByEmail(
+            forgetPasswordDTO.getSysBelone(),
+            forgetPasswordDTO.getTarget(),
+            encodedPassword
+        );
         
         if (rows > 0) {
-            log.info("重置密码成功: {}", resetPasswordDTO.getAccount());
+            log.info("重置密码成功: {}", forgetPasswordDTO.getTarget());
             // 删除验证码
-            verifyCodeUtil.deleteCode(resetPasswordDTO.getSysBelone(), resetPasswordDTO.getAccount());
+            verifyCodeUtil.deleteCode(forgetPasswordDTO.getSysBelone(), forgetPasswordDTO.getTarget());
         } else {
             log.error("[密码重置] 用户:{} 系统:{} 重置密码失败", 
-                    resetPasswordDTO.getAccount(), resetPasswordDTO.getSysBelone());
+                    forgetPasswordDTO.getTarget(), forgetPasswordDTO.getSysBelone());
         }
         
         return rows;
@@ -54,15 +56,37 @@ public class PasswordServiceImpl implements PasswordService {
     
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int changePassword(String sysBelone, String account, String oldPassword, String newPassword) {
+    public int changePassword(ForgetPasswordDTO forgetPasswordDTO) {
+        // 验证两次密码是否一致
+        if (!forgetPasswordDTO.getNewPassword().equals(forgetPasswordDTO.getConfirmPassword())) {
+            throw new BusinessException("两次输入的密码不一致");
+        }
+        
+        // 验证验证码
+        if (!verifyResetCode(forgetPasswordDTO.getSysBelone(), forgetPasswordDTO.getTarget(), forgetPasswordDTO.getCode())) {
+            throw new BusinessException("验证码无效");
+        }
+        
         // 更新密码
-        String encodedPassword = passwordEncoder.encode(newPassword);
-        int rows = passwordMapper.updatePassword(sysBelone, account, encodedPassword);
+        String encodedPassword = passwordEncoder.encode(forgetPasswordDTO.getNewPassword());
+        int rows = passwordMapper.updatePasswordByEmail(
+            forgetPasswordDTO.getSysBelone(), 
+            forgetPasswordDTO.getTarget(),  // 使用target（邮箱）更新密码
+            encodedPassword
+        );
         
         if (rows > 0) {
-            log.info("[密码修改] 用户:{} 系统:{} 修改密码成功", account, sysBelone);
+            log.info("[密码修改] 用户:{} 系统:{} 修改密码成功", 
+                forgetPasswordDTO.getTarget(), 
+                forgetPasswordDTO.getSysBelone()
+            );
+            // 删除验证码
+            verifyCodeUtil.deleteCode(forgetPasswordDTO.getSysBelone(), forgetPasswordDTO.getTarget());
         } else {
-            log.error("[密码修改] 用户:{} 系统:{} 修改密码失败", account, sysBelone);
+            log.error("[密码修改] 用户:{} 系统:{} 修改密码失败", 
+                forgetPasswordDTO.getTarget(), 
+                forgetPasswordDTO.getSysBelone()
+            );
         }
         
         return rows;

@@ -7,7 +7,7 @@ import com.example.auth.model.vo.UserVO;
 import com.example.auth.mapper.LoginMapper;
 import com.example.auth.service.LoginService;
 import com.example.auth.util.TokenUtil;
-import com.example.auth.util.VerifyCodeUtil;
+import com.example.auth.util.code.VerifyCodeUtil;
 import com.example.common.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

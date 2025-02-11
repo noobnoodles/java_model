@@ -1,7 +1,9 @@
-package com.example.auth.util;
+package com.example.auth.util.code;
 
 import com.example.auth.config.MailConfig;
 import com.example.auth.model.dto.SendVerifyCodeDTO;
+import com.example.auth.util.mail.IMessageBuilder;
+import com.example.auth.util.mail.MessageBuilderFactory;
 import com.example.common.core.exception.BusinessException;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -53,7 +55,12 @@ public class VerifyCodeSender {
      */
     private boolean sendEmailCode(SendVerifyCodeDTO dto) {
         try {
-            MessageBuilder messageBuilder = new MessageBuilder(mailConfig, dto);
+            // 根据不同场景使用不同的邮件构建器
+            IMessageBuilder messageBuilder = MessageBuilderFactory.createBuilder(
+                dto.getTargetType(),  // 使用targetType来区分不同场景
+                mailConfig, 
+                dto
+            );
             Message message = messageBuilder.build();
             jakarta.mail.Transport.send(message);
             return true;

@@ -17,8 +17,7 @@ public class SendVerifyCodeDTO {
     private String target;
     
     @Schema(description = "目标类型(1:手机号 2:邮箱)")
-    @NotBlank(message = "目标类型不能为空")
-    private Integer targetType;
+    private Integer targetType = 2;  // 默认为邮箱类型
     
     @Schema(description = "所属系统")
     @NotBlank(message = "所属系统不能为空")
