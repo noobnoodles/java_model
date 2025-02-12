@@ -65,4 +65,5 @@ system:
     sys-belone: test  # 添加系统标识 
 
 jwt:
-  secret: your_jwt_secret_key_must_be_at_least_256_bits_long_so_make_it_long_enough 
+  secret: 'rLOsWb8nGbWfYqRxmvVVP5FzRq8PJ9F4Qs7DmCJYp1U='  # 这是一个随机生成的256位密钥
+  # 例如：HZS/1234567890/qwertyuiopasdfghjklzxcvbnm/ASDFGH
