@@ -14,11 +14,17 @@ public interface TokenConstants {
     /** token密钥 */
     String TOKEN_SECRET = "your-secret-key";
     
-    /** token有效期（24小时） */
-    long TOKEN_EXPIRE = 24 * 60 * 60 * 1000L;
+    /** token有效期（2小时） */
+    long TOKEN_EXPIRE = 2 * 60 * 60 * 1000L;
     
-    /** 刷新token有效期（7天） */
-    long REFRESH_TOKEN_EXPIRE = 7 * 24 * 60 * 60 * 1000L;
+    /** 刷新token有效期（24小时） */
+    long REFRESH_TOKEN_EXPIRE = 24 * 60 * 60 * 1000L;
+    
+    /** 长期token有效期（7天） */
+    long REMEMBER_ME_TOKEN_EXPIRE = 7 * 24 * 60 * 60 * 1000L;
+    
+    /** 长期刷新token有效期（14天） */
+    long REMEMBER_ME_REFRESH_TOKEN_EXPIRE = 14 * 24 * 60 * 60 * 1000L;
     
     /** token类型 */
     interface TokenType {

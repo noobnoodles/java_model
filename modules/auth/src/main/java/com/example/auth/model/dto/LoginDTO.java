@@ -2,19 +2,17 @@ package com.example.auth.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Schema(description = "登录请求参数")
 public class LoginDTO {
 
-    @Schema(description = "登录标识(用户名/手机号/邮箱)")
-    @NotBlank(message = "登录账号不能为空")
+    @Schema(description = "账号")
+    @NotBlank(message = "账号不能为空")
     private String account;
 
-    @Schema(description = "登录类型(1:用户名,2:手机号,3:邮箱)")
-    @NotNull(message = "登录类型不能为空")
+    @Schema(description = "登录类型(1:用户名 2:手机号 3:邮箱)")
     private Integer loginType;
 
     @Schema(description = "密码")

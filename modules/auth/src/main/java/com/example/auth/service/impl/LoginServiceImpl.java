@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import io.jsonwebtoken.Claims;
 
 @Slf4j
 @Service
@@ -50,12 +51,32 @@ public class LoginServiceImpl implements LoginService {
             throw new BusinessException("密码错误");
         }
         
-        // 生成token
-        String token = tokenUtil.generateToken(user);
-        String refreshToken = tokenUtil.generateRefreshToken(user);
+        // 生成token，传入rememberMe参数
+        String token = tokenUtil.generateToken(user, loginDTO.getRememberMe());
+        String refreshToken = tokenUtil.generateRefreshToken(user, loginDTO.getRememberMe());
         
         // 转换为VO并返回
-        return convertToVO(user, token, refreshToken);
+        UserVO userVO = convertToVO(user, token, refreshToken);
+        
+        // 添加日志输出
+        log.info("用户登录成功 - 用户信息：");
+        log.info("用户ID: {}", userVO.getId());
+        log.info("用户名: {}", userVO.getUsername());
+        log.info("记住我: {}", loginDTO.getRememberMe());
+        log.info("Token: {}", userVO.getToken());
+        log.info("RefreshToken: {}", userVO.getRefreshToken());
+        log.info("过期时间: {}", userVO.getExpireTime());
+        
+        // 验证token
+        Claims claims = tokenUtil.getClaimsFromToken(token);
+        log.info("\nToken解析结果：");
+        log.info("用户ID: {}", claims.get("userId"));
+        log.info("系统归属: {}", claims.get("sysBelone"));
+        log.info("记住我: {}", claims.get("rememberMe"));
+        log.info("签发时间: {}", claims.getIssuedAt());
+        log.info("过期时间: {}", claims.getExpiration());
+        
+        return userVO;
     }
     
     @Override
@@ -69,10 +90,13 @@ public class LoginServiceImpl implements LoginService {
         User user;
         int loginType = loginDTO.getLoginType();
         if (loginType == 1) {
-            user = loginMapper.getUserByAccount(loginDTO.getAccount(), loginDTO.getSysBelone());
+            log.info("user login by Name");
+            user = loginMapper.getUserByUserName(loginDTO.getAccount(), loginDTO.getSysBelone());
         } else if (loginType == 2) {
+            log.info("user login by Phone");
             user = loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
         } else if (loginType == 3) {
+            log.info("user login by Email");
             user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
         } else {
             throw new BusinessException("不支持的登录类型");
@@ -84,8 +108,8 @@ public class LoginServiceImpl implements LoginService {
         }
         
         // 生成token
-        String token = tokenUtil.generateToken(user);
-        String refreshToken = tokenUtil.generateRefreshToken(user);
+        String token = tokenUtil.generateToken(user, loginDTO.getRememberMe());
+        String refreshToken = tokenUtil.generateRefreshToken(user, loginDTO.getRememberMe());
         
         // 删除验证码
         verifyCodeUtil.deleteCode(loginDTO.getSysBelone(), loginDTO.getAccount());
