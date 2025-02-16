@@ -124,6 +124,40 @@ public class LoginServiceImpl implements LoginService {
         // TODO: 实现登出逻辑
     }
     
+    @Override
+    public boolean verifyToken(String token) {
+        try {
+            // 移除 Bearer 前缀
+            if (token.startsWith(TokenConstants.TOKEN_PREFIX)) {
+                token = token.substring(TokenConstants.TOKEN_PREFIX.length());
+            }
+            
+            // 验证token
+            boolean isValid = tokenUtil.validateToken(token);
+            
+            if (isValid) {
+                // 从token中获取用户信息
+                Claims claims = tokenUtil.getClaimsFromToken(token);
+                String userId = claims.get("userId", String.class);
+                String sysBelone = claims.get("sysBelone", String.class);
+                
+                // 检查用户是否存在
+                User user = loginMapper.getUserByAccount(userId, sysBelone);
+                if (user == null) {
+                    log.warn("Token验证成功，但用户不存在 - 用户ID: {}", userId);
+                    return false;
+                }
+                
+                log.info("Token验证成功 - 用户ID: {}", userId);
+                return true;
+            }
+            return false;
+            
+        } catch (Exception e) {
+            log.error("Token验证失败", e);
+            throw new BusinessException(401, "token验证失败");
+        }
+    }
 
     private UserVO convertToVO(User user, String token, String refreshToken) {
         UserVO vo = new UserVO();

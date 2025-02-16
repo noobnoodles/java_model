@@ -41,4 +41,12 @@ public class LoginController {
         loginService.logout(token);
         return R.ok();
     }
+
+    @Operation(summary = "验证token")
+    @PostMapping("/verify")
+    public R<Boolean> verifyToken(@RequestHeader("Authorization") String token) {
+            boolean isValid = loginService.verifyToken(token);
+            return R.ok(isValid);
+        
+    }
 } 

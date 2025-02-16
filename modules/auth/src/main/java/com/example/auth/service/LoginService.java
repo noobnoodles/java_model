@@ -28,4 +28,11 @@ public interface LoginService {
      * throws BusinessException 当token无效时抛出异常
      */
     void logout(String token);
+    
+    /**
+     * 验证token
+     * @param token 访问令牌
+     * @return 验证结果
+     */
+    boolean verifyToken(String token);
 } 
