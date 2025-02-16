@@ -38,17 +38,17 @@ public class LoginServiceImpl implements LoginService {
         } else if (loginType == 3) {
             user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
         } else {
-            throw new BusinessException("不支持的登录类型");
+            throw new BusinessException(400, "不支持的登录类型");
         }
 
         // 验证用户是否存在
         if (user == null) {
-            throw new BusinessException("用户不存在");
+            throw new BusinessException(400, "用户不存在");
         }
         
         // 验证密码
         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-            throw new BusinessException("密码错误");
+            throw new BusinessException(400, "密码错误");
         }
         
         // 生成token，传入rememberMe参数
