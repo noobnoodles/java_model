@@ -12,16 +12,11 @@ public class AccountNumCreate {
     
     // 默认偏移值，可以根据需要调整
     private static final int OFFSET = 10000;
-    
-    /**
-     * 生成新的账号
-     * @param sysBelone 所属系统
-     * @return 16进制格式的账号
-     */
+
     public String createNewAccount(String sysBelone) {
         // 从数据库查询当前系统的用户总数
         int count = registerMapper.countUserNumber(sysBelone);
-        
+
         // 计算新账号（总数 + 偏移值）
         int newAccountNum = count + OFFSET;
         

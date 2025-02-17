@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,6 @@ public class PasswordServiceImpl implements PasswordService {
     private final PasswordEncoder passwordEncoder;
     private final VerifyCodeUtil verifyCodeUtil;
     private final VerifyCodeSender verifyCodeSender;
-    
     // 重置后的默认密码
     private static final String DEFAULT_PASSWORD = "123456@ABC";
     

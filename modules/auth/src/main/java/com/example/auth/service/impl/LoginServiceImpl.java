@@ -6,7 +6,8 @@ import com.example.auth.model.entity.User;
 import com.example.auth.model.vo.UserVO;
 import com.example.auth.mapper.LoginMapper;
 import com.example.auth.service.LoginService;
-import com.example.auth.util.TokenUtil;
+import com.example.auth.util.Token.TokenBuilder;
+import com.example.auth.util.Token.TokenParser;
 import com.example.auth.util.code.VerifyCodeUtil;
 import com.example.common.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,8 @@ public class LoginServiceImpl implements LoginService {
     
     private final LoginMapper loginMapper;
     private final PasswordEncoder passwordEncoder;
-    private final TokenUtil tokenUtil;
+    private final TokenBuilder tokenBuilder;
+    private final TokenParser tokenParser;
     private final VerifyCodeUtil verifyCodeUtil;
     
     @Override
@@ -52,8 +54,8 @@ public class LoginServiceImpl implements LoginService {
         }
         
         // 生成token，传入rememberMe参数
-        String token = tokenUtil.generateToken(user, loginDTO.getRememberMe());
-        String refreshToken = tokenUtil.generateRefreshToken(user, loginDTO.getRememberMe());
+        String token = tokenBuilder.generateToken(user, loginDTO.getRememberMe());
+        String refreshToken = tokenBuilder.generateRefreshToken(user, loginDTO.getRememberMe());
         
         // 转换为VO并返回
         UserVO userVO = convertToVO(user, token, refreshToken);
@@ -68,7 +70,7 @@ public class LoginServiceImpl implements LoginService {
         log.info("过期时间: {}", userVO.getExpireTime());
         
         // 验证token
-        Claims claims = tokenUtil.getClaimsFromToken(token);
+        Claims claims = tokenParser.getClaimsFromToken(token);
         log.info("\nToken解析结果：");
         log.info("用户ID: {}", claims.get("userId"));
         log.info("系统归属: {}", claims.get("sysBelone"));
@@ -108,8 +110,8 @@ public class LoginServiceImpl implements LoginService {
         }
         
         // 生成token
-        String token = tokenUtil.generateToken(user, loginDTO.getRememberMe());
-        String refreshToken = tokenUtil.generateRefreshToken(user, loginDTO.getRememberMe());
+        String token = tokenBuilder.generateToken(user, loginDTO.getRememberMe());
+        String refreshToken = tokenBuilder.generateRefreshToken(user, loginDTO.getRememberMe());
         
         // 删除验证码
         verifyCodeUtil.deleteCode(loginDTO.getSysBelone(), loginDTO.getAccount());
@@ -133,11 +135,11 @@ public class LoginServiceImpl implements LoginService {
             }
             
             // 验证token
-            boolean isValid = tokenUtil.validateToken(token);
+            boolean isValid = tokenParser.validateToken(token);
             
             if (isValid) {
                 // 从token中获取用户信息
-                Claims claims = tokenUtil.getClaimsFromToken(token);
+                Claims claims = tokenParser.getClaimsFromToken(token);
                 String userId = claims.get("userId", String.class);
                 String sysBelone = claims.get("sysBelone", String.class);
                 

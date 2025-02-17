@@ -1,8 +1,7 @@
-package com.example.auth.util;
+package com.example.auth.util.Token;
 
 import com.example.auth.constant.TokenConstants;
 import com.example.auth.model.entity.User;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -18,15 +17,15 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class TokenUtil {
-    
+public class TokenBuilder {
+
     @Value("${jwt.secret}")
     private String secret;
-    
+
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
-    
+
     /**
      * 生成token
      */
@@ -35,15 +34,15 @@ public class TokenUtil {
         Map<String, Object> header = new HashMap<>();
         header.put("typ", "JWT");
         header.put("alg", SignatureAlgorithm.HS256.getValue());
-        
+
         // 设置JWT负载
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getAccount());
         claims.put("sysBelone", user.getSysBelone());
         claims.put("rememberMe", rememberMe);
-        
+
         long expireTime = rememberMe ? TokenConstants.REMEMBER_ME_TOKEN_EXPIRE : TokenConstants.TOKEN_EXPIRE;
-        
+
         return Jwts.builder()
             .setHeader(header)                // 设置头部
             .setClaims(claims)                // 设置负载
@@ -52,7 +51,7 @@ public class TokenUtil {
             .signWith(getSigningKey(), SignatureAlgorithm.HS256)
             .compact();
     }
-    
+
     /**
      * 生成刷新token
      */
@@ -61,16 +60,16 @@ public class TokenUtil {
         Map<String, Object> header = new HashMap<>();
         header.put("typ", "JWT");
         header.put("alg", SignatureAlgorithm.HS256.getValue());
-        
+
         // 设置JWT负载
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getAccount());
         claims.put("sysBelone", user.getSysBelone());
         claims.put("type", "refresh");
         claims.put("rememberMe", rememberMe);
-        
+
         long expireTime = rememberMe ? TokenConstants.REMEMBER_ME_REFRESH_TOKEN_EXPIRE : TokenConstants.REFRESH_TOKEN_EXPIRE;
-        
+
         return Jwts.builder()
             .setHeader(header)
             .setClaims(claims)
@@ -78,47 +77,5 @@ public class TokenUtil {
             .setExpiration(new Date(System.currentTimeMillis() + expireTime))
             .signWith(getSigningKey(), SignatureAlgorithm.HS256)
             .compact();
-    }
-    
-    /**
-     * 验证token
-     */
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    /**
-     * 从token中获取用户信息
-     */
-    public Claims getClaimsFromToken(String token) {
-        return Jwts.parserBuilder()
-            .setSigningKey(getSigningKey())
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
-    }
-    
-    /**
-     * 从token中获取用户ID
-     */
-    public String getUserIdFromToken(String token) {
-        Claims claims = getClaimsFromToken(token);
-        return claims.get("userId", String.class);
-    }
-    
-    /**
-     * 从token中获取系统归属
-     */
-    public String getSysBeloneFromToken(String token) {
-        Claims claims = getClaimsFromToken(token);
-        return claims.get("sysBelone", String.class);
     }
 } 

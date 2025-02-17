@@ -13,11 +13,9 @@ public class ForgetPasswordDTO {
     private String target;
     
     @Schema(description = "新密码")
-    @NotBlank(message = "新密码不能为空")
     private String newPassword;
     
     @Schema(description = "确认新密码")
-    @NotBlank(message = "确认新密码不能为空")
     private String confirmPassword;
     
     @Schema(description = "验证码")
