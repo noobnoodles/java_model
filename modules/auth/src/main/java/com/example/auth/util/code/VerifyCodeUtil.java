@@ -31,9 +31,9 @@ public class VerifyCodeUtil {
     /**
      * 保存验证码
      */
-    public void saveCode(String sysBelone, String account, String code) {
-        String codeKey = CODE_PREFIX + sysBelone + ":" + account;
-        String cooldownKey = COOLDOWN_PREFIX + sysBelone + ":" + account;
+    public void saveCode(String account, String code) {
+        String codeKey = CODE_PREFIX + account;
+        String cooldownKey = COOLDOWN_PREFIX + account;
         
         // 保存验证码，设置过期时间
         redisTemplate.opsForValue().set(codeKey, code, CODE_EXPIRE, TimeUnit.MINUTES);
@@ -44,8 +44,8 @@ public class VerifyCodeUtil {
     /**
      * 验证验证码
      */
-    public boolean verifyCode(String sysBelone, String account, String code) {
-        String key = CODE_PREFIX + sysBelone + ":" + account;
+    public boolean verifyCode(String account, String code) {
+        String key = CODE_PREFIX + account;
         String savedCode = redisTemplate.opsForValue().get(key);
         return code.equals(savedCode);
     }
@@ -53,17 +53,17 @@ public class VerifyCodeUtil {
     /**
      * 检查是否可以发送验证码（是否在冷却时间内）
      */
-    public boolean canSendCode(String sysBelone, String account) {
-        String cooldownKey = COOLDOWN_PREFIX + sysBelone + ":" + account;
+    public boolean canSendCode(String account) {
+        String cooldownKey = COOLDOWN_PREFIX + account;
         return !Boolean.TRUE.equals(redisTemplate.hasKey(cooldownKey));
     }
     
     /**
      * 删除验证码
      */
-    public void deleteCode(String sysBelone, String account) {
-        String codeKey = CODE_PREFIX + sysBelone + ":" + account;
-        String cooldownKey = COOLDOWN_PREFIX + sysBelone + ":" + account;
+    public void deleteCode(String account) {
+        String codeKey = CODE_PREFIX + account;
+        String cooldownKey = COOLDOWN_PREFIX + account;
         redisTemplate.delete(codeKey);
         redisTemplate.delete(cooldownKey);
     }

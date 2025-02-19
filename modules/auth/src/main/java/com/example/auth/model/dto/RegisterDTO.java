@@ -40,8 +40,5 @@ public class RegisterDTO {
     @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
     @Schema(description = "手机号")
     private String phone;
-    
-    @NotBlank(message = "系统标识不能为空")
-    @Schema(description = "所属系统")
-    private String sysBelone;
+
 } 

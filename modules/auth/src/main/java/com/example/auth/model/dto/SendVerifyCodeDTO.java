@@ -19,9 +19,6 @@ public class SendVerifyCodeDTO {
     @Schema(description = "目标类型(1:手机号 2:邮箱)")
     private Integer targetType = 2;  // 默认为邮箱类型
     
-    @Schema(description = "所属系统")
-    @NotBlank(message = "所属系统不能为空")
-    private String sysBelone;
 
     @Schema(description = "验证码")
     private String code;

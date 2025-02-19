@@ -22,7 +22,4 @@ public class ForgetPasswordDTO {
     @NotBlank(message = "验证码不能为空")
     private String code;
     
-    @Schema(description = "所属系统")
-    @NotBlank(message = "所属系统不能为空")
-    private String sysBelone;
 } 

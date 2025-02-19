@@ -8,17 +8,17 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface RegisterMapper {
     
-    @Select("SELECT COUNT(*) FROM user_info WHERE account = #{account} AND sys_belone = #{sysBelone}")
-    int checkAccountExists(String account, String sysBelone);
+    @Select("SELECT COUNT(*) FROM user_info WHERE account = #{account} ")
+    int checkAccountExists(String account);
     
-    @Select("SELECT COUNT(*) FROM user_info WHERE username = #{username} AND sys_belone = #{sysBelone}")
-    int checkUsernameExists(String username, String sysBelone);
+    @Select("SELECT COUNT(*) FROM user_info WHERE username = #{username} ")
+    int checkUsernameExists(String username);
     
-    @Select("SELECT COUNT(*) FROM user_info WHERE email = #{email} AND sys_belone = #{sysBelone}")
-    int checkEmailExists(String email, String sysBelone);
+    @Select("SELECT COUNT(*) FROM user_info WHERE email = #{email}")
+    int checkEmailExists(String email);
     
-    @Insert("INSERT INTO user_info (account, username, password, email, sys_belone, phone, sexual, avatar, sign) " +
-            "VALUES (#{account}, #{username}, #{password}, #{email}, #{sysBelone}, #{phone}, #{sexual}, #{avatar}, #{sign})")
+    @Insert("INSERT INTO user_info (account, username, password, email, phone, sexual, avatar, sign) " +
+            "VALUES (#{account}, #{username}, #{password}, #{email}, #{phone}, #{sexual}, #{avatar}, #{sign})")
     int insertUser(User user);
     
     /**
@@ -26,6 +26,6 @@ public interface RegisterMapper {
      * @param sysBelone 所属系统
      * @return 用户总数
      */
-    @Select("SELECT COUNT(*) FROM user_info WHERE sys_belone = #{sysBelone}")
-    int countUserNumber(String sysBelone);
+    @Select("SELECT COUNT(*) FROM user_info")
+    int countUserNumber();
 } 

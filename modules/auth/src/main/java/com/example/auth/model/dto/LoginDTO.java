@@ -21,8 +21,5 @@ public class LoginDTO {
 
     @Schema(description = "记住我")
     private Boolean rememberMe = false;
-    
-    @Schema(description = "所属系统")
-    @NotBlank(message = "所属系统不能为空")
-    private String sysBelone;
+     
 } 

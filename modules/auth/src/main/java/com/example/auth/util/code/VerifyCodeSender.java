@@ -26,7 +26,7 @@ public class VerifyCodeSender {
      */
     public int sendCode(SendVerifyCodeDTO sendVerifyCodeDTO) {
         // 检查是否可以发送验证码
-        if (!verifyCodeUtil.canSendCode(sendVerifyCodeDTO.getSysBelone(), sendVerifyCodeDTO.getAccount())) {
+        if (!verifyCodeUtil.canSendCode(sendVerifyCodeDTO.getAccount())) {
             throw new BusinessException("验证码发送过于频繁，请稍后再试");
         }
         
@@ -39,13 +39,13 @@ public class VerifyCodeSender {
         
         if (sendResult) {
             // 保存验证码
-            verifyCodeUtil.saveCode(sendVerifyCodeDTO.getSysBelone(), sendVerifyCodeDTO.getAccount(), code);
-            log.info("[验证码] 用户:{} 系统:{} 发送验证码成功 目标:{}", 
-                    sendVerifyCodeDTO.getAccount(), sendVerifyCodeDTO.getSysBelone(), sendVerifyCodeDTO.getTarget());
+            verifyCodeUtil.saveCode(sendVerifyCodeDTO.getAccount(), code);
+            log.info("[验证码] 用户:{} 发送验证码成功 目标:{}", 
+                    sendVerifyCodeDTO.getAccount(), sendVerifyCodeDTO.getTarget());
             return 1;
         } else {
-            log.error("[验证码] 用户:{} 系统:{} 发送验证码失败 目标:{}", 
-                    sendVerifyCodeDTO.getAccount(), sendVerifyCodeDTO.getSysBelone(), sendVerifyCodeDTO.getTarget());
+            log.error("[验证码] 用户:{} 发送验证码失败 目标:{}", 
+                    sendVerifyCodeDTO.getAccount(), sendVerifyCodeDTO.getTarget());
             return 0;
         }
     }

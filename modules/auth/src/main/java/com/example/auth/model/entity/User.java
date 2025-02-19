@@ -13,8 +13,6 @@ public class User {
     
     private String password;
     
-    private String sysBelone;
-    
     private String phone;
     
     private Integer sexual;

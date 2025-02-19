@@ -30,8 +30,6 @@ public class SystemController {
     @Value("${system.info.copyright}")
     private String copyright;
     
-    @Value("${system.info.sys-belone}")
-    private String sysBelone;
 
     @Operation(summary = "获取系统信息")
     @GetMapping("/info")
@@ -41,7 +39,6 @@ public class SystemController {
         systemInfo.setDescription(description);
         systemInfo.setVersion(version);
         systemInfo.setCopyright(copyright);
-        systemInfo.setSysBelone(sysBelone);
         
         return R.ok(systemInfo);
     }

@@ -15,32 +15,28 @@ public interface RegisterService {
     /**
      * 检查用户名是否可用
      * @param username 用户名
-     * @param sysBelone 系统标识
      * @return true:可用 false:已存在
      */
-    boolean checkUsernameAvailable(String username, String sysBelone);
+    boolean checkUsernameAvailable(String username);
     
     /**
      * 检查账号是否可用
      * @param account 账号
-     * @param sysBelone 系统标识
      * @return true:可用 false:已存在
      */
-    boolean checkAccountAvailable(String account, String sysBelone);
+    boolean checkAccountAvailable(String account);
     
     /**
      * 检查邮箱是否可用
      * @param email 邮箱
-     * @param sysBelone 系统标识
      * @return true:可用 false:已存在
      */
-    boolean checkEmailAvailable(String email, String sysBelone);
+    boolean checkEmailAvailable(String email);
 
     /**
      * 发送邮箱验证码
      * @param email 邮箱
-     * @param sysBelone 系统标识
      * @return true:发送成功 false:发送失败
      */
-    boolean sendEmailCode(String email, String sysBelone);
+    boolean sendEmailCode(String email);
 } 

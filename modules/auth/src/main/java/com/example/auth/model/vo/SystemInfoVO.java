@@ -14,6 +14,4 @@ public class SystemInfoVO {
     private String version;
     
     private String copyright;
-
-    private String sysBelone;
 }

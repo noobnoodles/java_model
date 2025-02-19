@@ -31,23 +31,22 @@ public class RegisterController {
     
     @Operation(summary = "检查用户名是否可用")
     @GetMapping("/check-username")
-    public R<Boolean> checkUsername(@RequestParam String username, @RequestParam String sysBelone) {
-        return R.ok(registerService.checkUsernameAvailable(username, sysBelone));
+    public R<Boolean> checkUsername(@RequestParam String username) {
+        return R.ok(registerService.checkUsernameAvailable(username));
     }
     
     @Operation(summary = "发送邮箱验证码")
     @PostMapping("/send-email-code")
     public R<Void> sendEmailCode(
-        @RequestParam("email") String email, 
-        @RequestParam("sysBelone") String sysBelone
+        @RequestParam("email") String email
     ) {
         // 先检查邮箱是否可用
-        if (!registerService.checkEmailAvailable(email, sysBelone)) {
+        if (!registerService.checkEmailAvailable(email)) {
             return R.fail("该邮箱已被使用");
         }
         
         // 发送验证码
-        if (registerService.sendEmailCode(email, sysBelone)) {
+        if (registerService.sendEmailCode(email)) {
             return R.ok();
         } else {
             return R.fail("验证码发送失败");

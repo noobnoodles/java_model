@@ -36,7 +36,6 @@ public class RegisterServiceImpl implements RegisterService {
 
         // 验证邮箱验证码
         boolean isCodeValid = verifyCodeUtil.verifyCode(
-            registerDTO.getSysBelone(),
             registerDTO.getEmail(),  // 使用邮箱作为账号
             registerDTO.getEmailCode()
         );
@@ -50,19 +49,18 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPassword(registerDTO.getPassword());
         user.setEmail(registerDTO.getEmail());
         user.setPhone(registerDTO.getPhone());
-        user.setSysBelone(registerDTO.getSysBelone());
         
         // 生成账号
-        String account = accountNumCreate.createNewAccount(registerDTO.getSysBelone());
+        String account = accountNumCreate.createNewAccount();
         user.setAccount(account);
         
         // 检查用户名是否已存在
-        if (!checkUsernameAvailable(user.getUsername(), user.getSysBelone())) {
+        if (!checkUsernameAvailable(user.getUsername())) {
             throw new BusinessException("用户名已存在");
         }
         
         // 检查邮箱是否已存在
-        if (user.getEmail() != null && registerMapper.checkEmailExists(user.getEmail(), user.getSysBelone()) > 0) {
+        if (user.getEmail() != null && registerMapper.checkEmailExists(user.getEmail()) > 0) {
             throw new BusinessException("邮箱已被使用");
         }
         
@@ -74,7 +72,7 @@ public class RegisterServiceImpl implements RegisterService {
         
         if (rows > 0) {
             // 注册成功后删除验证码
-            verifyCodeUtil.deleteCode(registerDTO.getSysBelone(), registerDTO.getEmail());
+            verifyCodeUtil.deleteCode(registerDTO.getEmail());
             log.info("用户注册成功: {}", user.getAccount());
         } else {
             log.error("用户注册失败: {}", user.getAccount());
@@ -84,30 +82,29 @@ public class RegisterServiceImpl implements RegisterService {
     }
     
     @Override
-    public boolean checkUsernameAvailable(String username, String sysBelone) {
-        return registerMapper.checkUsernameExists(username, sysBelone) == 0;
+    public boolean checkUsernameAvailable(String username) {
+        return registerMapper.checkUsernameExists(username) == 0;
     }
     
     @Override
-    public boolean checkAccountAvailable(String account, String sysBelone) {
-        return registerMapper.checkAccountExists(account, sysBelone) == 0;
+    public boolean checkAccountAvailable(String account) {
+        return registerMapper.checkAccountExists(account) == 0;
     }
     
     @Override
-    public boolean checkEmailAvailable(String email, String sysBelone) {
+    public boolean checkEmailAvailable(String email) {
         // 检查邮箱是否已存在
-        return registerMapper.checkEmailExists(email, sysBelone) == 0;
+        return registerMapper.checkEmailExists(email) == 0;
     }
 
     @Override
-    public boolean sendEmailCode(String email, String sysBelone) {
+    public boolean sendEmailCode(String email) {
         try {
             // 构建验证码发送请求
             SendVerifyCodeDTO sendVerifyCodeDTO = new SendVerifyCodeDTO();
             sendVerifyCodeDTO.setAccount(email);  // 使用邮箱作为账号
             sendVerifyCodeDTO.setTarget(email);   // 发送目标为邮箱
             sendVerifyCodeDTO.setTargetType(2);   // 2表示邮箱
-            sendVerifyCodeDTO.setSysBelone(sysBelone);
             
             // 发送验证码邮件
             int sendResult = verifyCodeSender.sendCode(sendVerifyCodeDTO);

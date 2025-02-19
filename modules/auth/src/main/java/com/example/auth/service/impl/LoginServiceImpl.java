@@ -34,11 +34,11 @@ public class LoginServiceImpl implements LoginService {
 
         int loginType = loginDTO.getLoginType();
         if (loginType == 1) {
-            user = loginMapper.getUserByUserName(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByUserName(loginDTO.getAccount());
         } else if (loginType == 2) {
-            user = loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByPhone(loginDTO.getAccount());
         } else if (loginType == 3) {
-            user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByEmail(loginDTO.getAccount());
         } else {
             throw new BusinessException(400, "不支持的登录类型");
         }
@@ -73,7 +73,6 @@ public class LoginServiceImpl implements LoginService {
         Claims claims = tokenParser.getClaimsFromToken(token);
         log.info("\nToken解析结果：");
         log.info("用户ID: {}", claims.get("userId"));
-        log.info("系统归属: {}", claims.get("sysBelone"));
         log.info("记住我: {}", claims.get("rememberMe"));
         log.info("签发时间: {}", claims.getIssuedAt());
         log.info("过期时间: {}", claims.getExpiration());
@@ -84,7 +83,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserVO loginByCode(LoginDTO loginDTO, String code) {
         // 验证验证码
-        if (!verifyCodeUtil.verifyCode(loginDTO.getSysBelone(), loginDTO.getAccount(), code)) {
+        if (!verifyCodeUtil.verifyCode(loginDTO.getAccount(), code)) {
             throw new BusinessException("验证码无效");
         }
         
@@ -93,13 +92,13 @@ public class LoginServiceImpl implements LoginService {
         int loginType = loginDTO.getLoginType();
         if (loginType == 1) {
             log.info("user login by Name");
-            user = loginMapper.getUserByUserName(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByUserName(loginDTO.getAccount());
         } else if (loginType == 2) {
             log.info("user login by Phone");
-            user = loginMapper.getUserByPhone(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByPhone(loginDTO.getAccount());
         } else if (loginType == 3) {
             log.info("user login by Email");
-            user = loginMapper.getUserByEmail(loginDTO.getAccount(), loginDTO.getSysBelone());
+            user = loginMapper.getUserByEmail(loginDTO.getAccount());
         } else {
             throw new BusinessException("不支持的登录类型");
         }
@@ -114,7 +113,7 @@ public class LoginServiceImpl implements LoginService {
         String refreshToken = tokenBuilder.generateRefreshToken(user, loginDTO.getRememberMe());
         
         // 删除验证码
-        verifyCodeUtil.deleteCode(loginDTO.getSysBelone(), loginDTO.getAccount());
+        verifyCodeUtil.deleteCode(loginDTO.getAccount());
         
         // 转换为VO并返回
         return convertToVO(user, token, refreshToken);
@@ -141,10 +140,9 @@ public class LoginServiceImpl implements LoginService {
                 // 从token中获取用户信息
                 Claims claims = tokenParser.getClaimsFromToken(token);
                 String userId = claims.get("userId", String.class);
-                String sysBelone = claims.get("sysBelone", String.class);
                 
                 // 检查用户是否存在
-                User user = loginMapper.getUserByAccount(userId, sysBelone);
+                User user = loginMapper.getUserByAccount(userId);
                 if (user == null) {
                     log.warn("Token验证成功，但用户不存在 - 用户ID: {}", userId);
                     return false;

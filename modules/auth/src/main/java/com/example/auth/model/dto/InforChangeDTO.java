@@ -25,8 +25,5 @@ public class InforChangeDTO {
     @NotNull
     private String accountID;
 
-    @Schema(description = "系统标识")
-    @NotNull
-    private String sysBelone;
 
 }

@@ -13,9 +13,9 @@ public class AccountNumCreate {
     // 默认偏移值，可以根据需要调整
     private static final int OFFSET = 10000;
 
-    public String createNewAccount(String sysBelone) {
+    public String createNewAccount() {
         // 从数据库查询当前系统的用户总数
-        int count = registerMapper.countUserNumber(sysBelone);
+        int count = registerMapper.countUserNumber();
 
         // 计算新账号（总数 + 偏移值）
         int newAccountNum = count + OFFSET;
@@ -27,13 +27,12 @@ public class AccountNumCreate {
     
     /**
      * 使用自定义偏移值生成新账号
-     * @param sysBelone 所属系统
      * @param customOffset 自定义偏移值
      * @return 16进制格式的账号
      */
-    public String createNewAccount(String sysBelone, int customOffset) {
+    public String createNewAccount(int customOffset) {
         // 从数据库查询当前系统的用户总数
-        int count = registerMapper.countUserNumber(sysBelone);
+        int count = registerMapper.countUserNumber();
         
         int newAccountNum = count + customOffset;
         String hexAccount = Integer.toHexString(newAccountNum).toUpperCase();

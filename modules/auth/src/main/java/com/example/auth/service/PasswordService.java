@@ -6,6 +6,6 @@ import com.example.auth.model.dto.SendVerifyCodeDTO;
 public interface PasswordService {
     int resetPassword(ForgetPasswordDTO forgetPasswordDTO);
     int changePassword(ForgetPasswordDTO forgetPasswordDTO);
-    boolean verifyResetCode(String sysBelone, String account, String code);
+    boolean verifyResetCode(String account, String code);
     int sendVerifyCode(SendVerifyCodeDTO sendVerifyCodeDTO);
 } 

@@ -38,7 +38,6 @@ public class TokenBuilder {
         // 设置JWT负载
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getAccount());
-        claims.put("sysBelone", user.getSysBelone());
         claims.put("rememberMe", rememberMe);
 
         long expireTime = rememberMe ? TokenConstants.REMEMBER_ME_TOKEN_EXPIRE : TokenConstants.TOKEN_EXPIRE;
@@ -64,7 +63,6 @@ public class TokenBuilder {
         // 设置JWT负载
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getAccount());
-        claims.put("sysBelone", user.getSysBelone());
         claims.put("type", "refresh");
         claims.put("rememberMe", rememberMe);
 
