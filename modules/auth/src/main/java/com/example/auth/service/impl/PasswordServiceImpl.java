@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.auth.util.account.PasswordReset;
 
 
 @Slf4j
@@ -23,34 +24,16 @@ public class PasswordServiceImpl implements PasswordService {
     private final PasswordEncoder passwordEncoder;
     private final VerifyCodeUtil verifyCodeUtil;
     private final VerifyCodeSender verifyCodeSender;
+    private final PasswordReset passwordReset;
     // 重置后的默认密码
-    private static final String DEFAULT_PASSWORD = "123456@ABC";
     
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int resetPassword(ForgetPasswordDTO forgetPasswordDTO) {
-        // 验证验证码
-        if (!verifyResetCode(forgetPasswordDTO.getTarget(), forgetPasswordDTO.getCode())) {
-            throw new BusinessException("验证码无效");
-        }
-        
-        // 更新为默认密码
-        String encodedPassword = passwordEncoder.encode(DEFAULT_PASSWORD);
-        int rows = passwordMapper.updatePasswordByEmail(
-            forgetPasswordDTO.getTarget(),
-            encodedPassword
+        return passwordReset.resetWithCode(
+            forgetPasswordDTO.getTarget(), 
+            forgetPasswordDTO.getCode()
         );
-        
-        if (rows > 0) {
-            log.info("重置密码成功: {}", forgetPasswordDTO.getTarget());
-            // 删除验证码
-            verifyCodeUtil.deleteCode(forgetPasswordDTO.getTarget());
-        } else {
-            log.error("[密码重置] 用户:{} 系统:{} 重置密码失败", 
-                    forgetPasswordDTO.getTarget());
-        }
-        
-        return rows;
     }
     
     @Override

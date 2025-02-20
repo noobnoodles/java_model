@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 @Slf4j
 @Tag(name = "登录管理")
 @CrossOrigin(originPatterns = "http://localhost:[*]", allowCredentials = "true")
@@ -49,4 +50,5 @@ public class LoginController {
             return R.ok(isValid);
         
     }
+
 } 

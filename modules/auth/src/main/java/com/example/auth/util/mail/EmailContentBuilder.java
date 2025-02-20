@@ -39,6 +39,25 @@ public class EmailContentBuilder {
         return content.toString();
     }
 
+    public static String buildPasswordResetNotifySubject() {
+        return "密码重置通知";
+    }
+
+    public static String buildPasswordResetNotifyContent(String defaultPassword) {
+        StringBuilder content = new StringBuilder();
+        content.append("尊敬的用户：\n\n");
+        content.append("您的账户密码已被重置。\n\n");
+        content.append("新的登录密码为：").append(defaultPassword).append("\n");
+        content.append("为了您的账户安全，请尽快登录并修改密码。\n\n");
+        content.append("⚠️ 安全提醒：\n\n");
+        content.append("1. 请妥善保管您的账户信息\n");
+        content.append("2. 请勿将密码告知他人\n");
+        content.append("3. 如非本人操作，请立即联系管理员\n\n");
+        content.append("感谢您的支持！\n\n\n");
+        content.append(getCurrentDate());
+        return content.toString();
+    }
+
     private static String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日");

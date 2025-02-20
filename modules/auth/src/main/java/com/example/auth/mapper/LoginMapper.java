@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface LoginMapper {
     
@@ -27,4 +29,11 @@ public interface LoginMapper {
     User getUserByUserName(
         @Param("userName") String userName
     );
+
+    /**
+     * 获取所有用户
+     * @return 用户列表
+     */
+    @Select("SELECT * FROM user_info")
+    List<User> getAllUsers();
 }

@@ -3,6 +3,7 @@ package com.example.auth.service;
 import com.example.auth.model.dto.LoginDTO;
 import com.example.auth.model.vo.UserVO;
 
+
 public interface LoginService {
     
     /**
@@ -35,4 +36,5 @@ public interface LoginService {
      * @return 验证结果
      */
     boolean verifyToken(String token);
+    
 } 
